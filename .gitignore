@@ -152,3 +152,6 @@ fabric.properties
 
 # MAC OS file
 .DS_Store
+
+# Test file
+*.mp4
