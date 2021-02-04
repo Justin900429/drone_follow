@@ -11,10 +11,6 @@ arg_p.add_argument("-l", "--location",
                    required=True,
                    help="The folder for saving the images"
                    )
-arg_p.add_argument("-f", "--fps",
-                   type=int,
-                   default=20,
-                   help="Frame per second for the extracted images")
 arg_p.add_argument("-p", "--prefix",
                    type=str,
                    default="out",
