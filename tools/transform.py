@@ -37,7 +37,7 @@ res = []
 # Get all the file in dir
 for dir in os.listdir(args["location"]):
     # Get the dirname
-    dir_name = f"{args['location']}{dir}"
+    dir_name = f"{args['location']}/{dir}"
 
     # Check whether is dir
     if not os.path.isdir(dir_name):
@@ -45,13 +45,11 @@ for dir in os.listdir(args["location"]):
 
     # Process the files
     for file in os.listdir(dir_name):
-        # Temp array for csv
-        temp_csv = ["UNASSIGNED"]
 
         # Check the class ends with txt
         #  and not class.txt
-        if (not file.endswith(".txt")) & \
-                (file != "classes.txt"):
+        if (not file.endswith(".txt")) | \
+                (file == "classes.txt"):
             continue
 
         # Get the file name
@@ -60,13 +58,17 @@ for dir in os.listdir(args["location"]):
         # Read in txt as csv
         df_txt = pd.read_csv(file_whole_name, sep=" ", header=None)
 
-        # gs://prefix/name/{image_name}
-        cloud_path = f"{prefix}{os.path.splitext(file)[0]}.jpg"
-        temp_csv.append(cloud_path)
-
+        # Create data for each labels
         for index, row in df_txt.iterrows():
+            # Temp array for csv
+            temp_csv = ["UNASSIGNED"]
+
+            # gs://prefix/name/{image_name}
+            cloud_path = f"{prefix}{os.path.splitext(file)[0]}.jpg"
+            temp_csv.append(cloud_path)
+
             # Class label
-            temp_csv.append(class_labels[row[0]])
+            temp_csv.append(class_labels[int(row[0])])
 
             # Add the upper left coordinate
             temp_csv.extend([row[1], row[2]])
@@ -80,8 +82,9 @@ for dir in os.listdir(args["location"]):
             # Add the upper right coordinate (not necessary, left blank)
             temp_csv.extend(["", ""])
 
-        # Append to the res
-        res.append(temp_csv)
+            # Append to the res
+            res.append(temp_csv)
+
 
 # Write to the result csv
 res_csv = pd.DataFrame(res,
