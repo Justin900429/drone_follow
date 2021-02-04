@@ -157,6 +157,7 @@ fabric.properties
 *.mp4
 *.jpg
 *.txt
+*.csv
 labels
 images
 videos
