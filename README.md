@@ -11,6 +11,6 @@ To train the model, we should prepare the dataset. The file **capture.py** can b
 ffmpeg -i output.mp4 -vf "fps=20" "frame/out%02d.jpg"
 
 # Using extract.py
-python extrac.py -n <name of input file> -l <location of output files> -p <prefix of extracted files>
+python extract.py -n <input file> -l <location of output files> -p <prefix of extracted files>
 ```
 
