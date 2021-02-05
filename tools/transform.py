@@ -29,7 +29,7 @@ class_labels = [
     "five"
 ]
 # Prefix of the cloud storage
-prefix = f"gs://{args['prefix']}"
+ori_prefix = f"gs://{args['prefix']}"
 
 # Array for final csv file
 res = []
@@ -43,7 +43,7 @@ for dir in os.listdir(args["location"]):
     if not os.path.isdir(dir_name):
         continue
 
-    prefix = f"{prefix}/{dir}"
+    prefix = f"{ori_prefix}/{dir}"
 
     # Process the files
     for file in os.listdir(dir_name):
