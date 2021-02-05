@@ -73,13 +73,17 @@ for dir in os.listdir(args["location"]):
             temp_csv.append(class_labels[int(row[0])])
 
             # Add the upper left coordinate
-            temp_csv.extend([row[1] - row[3] / 2, row[2] - row[4] / 2])
+            x_min = min(max(0.0, row[1] - row[3] / 2), 1.0)
+            y_min = min(max(0.0, row[2] - row[4] / 2), 1.0)
+            temp_csv.extend([x_min, y_min])
 
             # Add the lower left coordinate (not necessary, left blank)
             temp_csv.extend(["", ""])
 
             # Add the lower right coordinate
-            temp_csv.extend([row[1] + row[3] / 2, row[2] + row[4] / 2])
+            x_max = min(max(0.0, row[1] + row[3] / 2), 1.0)
+            y_max = min(max(0.0, row[2] + row[4] / 2), 1.0)
+            temp_csv.extend([x_max, y_max])
 
             # Add the upper right coordinate (not necessary, left blank)
             temp_csv.extend(["", ""])
