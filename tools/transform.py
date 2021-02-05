@@ -29,7 +29,7 @@ class_labels = [
     "five"
 ]
 # Prefix of the cloud storage
-prefix = f"gs://{args['prefix']}/"
+prefix = f"gs://{args['prefix']}"
 
 # Array for final csv file
 res = []
@@ -42,6 +42,8 @@ for dir in os.listdir(args["location"]):
     # Check whether is dir
     if not os.path.isdir(dir_name):
         continue
+
+    prefix = f"{prefix}/{dir}"
 
     # Process the files
     for file in os.listdir(dir_name):
@@ -64,7 +66,7 @@ for dir in os.listdir(args["location"]):
             temp_csv = ["UNASSIGNED"]
 
             # gs://prefix/name/{image_name}
-            cloud_path = f"{prefix}{os.path.splitext(file)[0]}.jpg"
+            cloud_path = f"{prefix}/{os.path.splitext(file)[0]}.jpg"
             temp_csv.append(cloud_path)
 
             # Class label
