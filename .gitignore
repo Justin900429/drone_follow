@@ -154,11 +154,6 @@ fabric.properties
 .DS_Store
 
 # Test file
-*.mp4
-*.jpg
-*.txt
-*.csv
-labels
-images
-videos
-
+labels/*
+images/*
+videos/*
